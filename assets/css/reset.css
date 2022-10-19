@@ -1,0 +1,35 @@
+:root {
+  background-color: #333;
+  color: #ddd;
+  font-family: sans-serif;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  line-height: 1;
+  font-family: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 100%;
+}
+
+/* Matches the font of special elements to the rest of the page */
+input,
+select,
+option,
+optgroup,
+textarea,
+button {
+  font-size: 100%;
+  font-family: inherit;
+}
