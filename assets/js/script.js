@@ -26,6 +26,25 @@ console.log(questions[6]);
 //What will <code>Boolean(3<7)</code> return?
 //A: true, false, NaN, SyntaxError
 
+// POSSIBLE WAY TO SET UP QUIZ QUESTIONS
+//
+// var questions = [
+//     {
+//         questionText1: "123",
+//         options: [
+//             answerOptions: "1"
+//             answerOptions: "2"
+//             answerOptions: "3"
+//             answerOptions: "4"
+//         ]
+//         answer: 3,
+//     }
+// ]
+
+// function setUpQuestion(questions) {
+//     document.querySelector(".question.text").textContent = question.text;
+// }
+
 startButton.addEventListener("click", startGame)
 
 function startGame() {
