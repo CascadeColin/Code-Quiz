@@ -6,10 +6,18 @@ var startButton = document.querySelector('.start')
 var h1 = document.getElementById('h1');
 var p = document.getElementById('p');
 var button = document.getElementById('button');
+var quizAnswersEl = document.getElementById('quizAnswersEl');
+
+
 questions = ['When a browser displays a page, what is it referencing to build the page?','What is the best way to find out more information about a data type in your code?','How do you create a function in JavaScript?','How does a FOR loop start?','How do you add a comment in a JavaScript file?','What is the correct “if” statements to execute certain code if “x” is equal to 2?','What will <code>Boolean(3<7)</code> return?']
-console.log(questions.length);
+// console.log(questions.length);
 console.log(questions[0]);
 console.log(questions[6]);
+
+
+var questionRandomIndex = Math.floor(Math.random() * questions.length);
+
+
 //Questions/Answers
 //When a browser displays a page, what is it referencing to build the page?
 //A:  DOM, JavaScript, HTML, CSS
@@ -64,9 +72,26 @@ function startGame() {
 // }
 
 function questionFormat() {
+    //1) randomly select a question
+    console.log(questions[questionRandomIndex]);
     console.log(h1.textContent);
     // document.getElementById('h1').innerHTML = 'This is the new question?'
-    h1.textContent = 'This is the new question?';
-    console.log(h1.textContent);
+    h1.textContent = questions[questionRandomIndex];
+    //hide the p tag here
+    button.style.display = "none";
+    p.style.display = "none";
+    //hide the start button
+    //insert new content
+    var newButton1 = document.createElement('button');
+    quizAnswersEl.appendChild(newButton1);
+    newButton1.textContent = "test";
+    var newButton2 = document.createElement('button');
+    quizAnswersEl.appendChild(newButton2);
+    newButton2.textContent = "test";
+    var newButton3 = document.createElement('button');
+    quizAnswersEl.appendChild(newButton3);
+    newButton3.textContent = "test";
+    var newButton4 = document.createElement('button');
+    quizAnswersEl.appendChild(newButton4);
+    newButton4.textContent = "test";
 }
-
