@@ -35,19 +35,21 @@ var questionRandomIndex = Math.floor(Math.random() * questions.length);
 //A: true, false, NaN, SyntaxError
 
 // POSSIBLE WAY TO SET UP QUIZ QUESTIONS
-//
-// var questions = [
-//     {
-//         questionText1: "123",
-//         options: [
-//             answerOptions: "1"
-//             answerOptions: "2"
-//             answerOptions: "3"
-//             answerOptions: "4"
-//         ]
-//         answer: 3,
-//     }
-// ]
+var testQuestions = [
+    {
+        //property = value
+        //key value pairs
+        questionText: "123",
+        options: [1,2,3,4],
+        answer: 3
+    },
+    {
+        questionText: "abc",
+        options: [1,2,3,4],
+        answer: 2
+    }
+]
+console.log(testQuestions[0].options[0]);
 
 // function setUpQuestion(questions) {
 //     document.querySelector(".question.text").textContent = question.text;
@@ -78,6 +80,7 @@ function questionFormat() {
     // document.getElementById('h1').innerHTML = 'This is the new question?'
     h1.textContent = questions[questionRandomIndex];
     //hide the p tag here
+    //these are hidden, not deleted
     button.style.display = "none";
     p.style.display = "none";
     //hide the start button
