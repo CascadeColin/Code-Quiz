@@ -191,8 +191,6 @@ function startTimer() {
         console.log(answerEl[i]);
         answerEl[i].style.display = "none";
       }
-      
-      //bugged, make sure this resets the page
     }
   }, 1000);
 }
