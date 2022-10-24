@@ -13,7 +13,7 @@ var answerEl = document.getElementById("answerEl");
 //Used to incremend to the next question after each is answered
 var currentQuestion = 0;
 var timerEl = document.getElementById("timer");
-var time = 5;
+var time = 75;
 var quizComplete = false;
 var highscoreInitials = [];
 var highscoreScore = [];
@@ -103,9 +103,6 @@ startButton.addEventListener("click", startGame);
 viewHighscore.addEventListener("click", function () {
   var initials = JSON.parse(localStorage.getItem("initials"));
   var score = JSON.parse(localStorage.getItem("score"));
-  console.log(initials);
-  console.log(score);
-
   var closeHighscore = document.createElement("button");
   closeHighscore.className = "close";
   closeHighscore.textContent = "Close Highscores";
@@ -120,9 +117,10 @@ viewHighscore.addEventListener("click", function () {
   }
   closeHighscore.addEventListener("click", function () {
     closeHighscore.style.display = "none";
-    var close = document.querySelectorAll("#close");
+    var close = document.querySelectorAll(".close");
     console.log(close);
-    for (i = 1; i <= 100; i++) {
+    for (i = 1; i <= initials.length; i++) {
+        initials.length++;
       document.body.children[1].children[0].children[3].children[
         i
       ].style.display = "none";
@@ -160,7 +158,7 @@ function highscores() {
   //resets landing page so user can take the quiz again
   button.style.display = "block";
   currentQuestion = 0;
-  time = 5;
+  time = 75;
 }
 
 function startTimer() {
@@ -231,7 +229,7 @@ function askQuestion() {
     if (testQuestions[currentQuestion].options[0].answer == true) {
       currentQuestion++;
       var correct = document.createElement("p");
-      quizAnswersEl.appendChild(correct);
+      answerEl.appendChild(correct);
       correct.textContent = "Correct Answer!";
       correct.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -252,7 +250,7 @@ function askQuestion() {
     } else {
       currentQuestion++;
       var wrong = document.createElement("p");
-      quizAnswersEl.appendChild(wrong);
+      answerEl.appendChild(wrong);
       wrong.textContent = "Wrong Answer!";
       wrong.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -278,7 +276,7 @@ function askQuestion() {
     if (testQuestions[currentQuestion].options[1].answer == true) {
       currentQuestion++;
       var correct = document.createElement("p");
-      quizAnswersEl.appendChild(correct);
+      answerEl.appendChild(correct);
       correct.textContent = "Correct Answer!";
       correct.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -308,7 +306,7 @@ function askQuestion() {
       newButton4.style.display = "none";
       time = time - 10;
       var timerTimeout = setTimeout(function (ev) {
-        ev.stopPropagation();
+        // ev.stopPropagation();
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
@@ -325,7 +323,7 @@ function askQuestion() {
     if (testQuestions[currentQuestion].options[2].answer == true) {
       currentQuestion++;
       var correct = document.createElement("p");
-      quizAnswersEl.appendChild(correct);
+      answerEl.appendChild(correct);
       correct.textContent = "Correct Answer!";
       correct.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -345,7 +343,7 @@ function askQuestion() {
     } else {
       currentQuestion++;
       var wrong = document.createElement("p");
-      quizAnswersEl.appendChild(wrong);
+      answerEl.appendChild(wrong);
       wrong.textContent = "Wrong Answer!";
       wrong.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -354,12 +352,14 @@ function askQuestion() {
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
       time = time - 10;
-      var timerTimeout = setTimeout(function () {
+      var timerTimeout = setTimeout(function (ev) {
+        // ev.stopPropagation();
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-          window.alert("highscore: " + time);
+          // window.alert("highscore: " + time);
+          highscores();
         } else {
           askQuestion();
         }
@@ -370,7 +370,7 @@ function askQuestion() {
     if (testQuestions[currentQuestion].options[3].answer == true) {
       currentQuestion++;
       var correct = document.createElement("p");
-      quizAnswersEl.appendChild(correct);
+      answerEl.appendChild(correct);
       correct.textContent = "Correct Answer!";
       correct.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -390,7 +390,7 @@ function askQuestion() {
     } else {
       currentQuestion++;
       var wrong = document.createElement("p");
-      quizAnswersEl.appendChild(wrong);
+      answerEl.appendChild(wrong);
       wrong.textContent = "Wrong Answer!";
       wrong.setAttribute("id", "pEl");
       newButton1.style.display = "none";
@@ -399,12 +399,14 @@ function askQuestion() {
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
       time = time - 10;
-      var timerTimeout = setTimeout(function () {
+      var timerTimeout = setTimeout(function (ev) {
+        // ev.stopPropagation();
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-          window.alert("highscore: " + time);
+          // window.alert("highscore: " + time);
+          highscores();
         } else {
           askQuestion();
         }
