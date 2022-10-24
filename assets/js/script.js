@@ -8,6 +8,7 @@ var p = document.getElementById("p");
 var quizAnswersEl = document.getElementById("quizAnswersEl");
 //Used to incremend to the next question after each is answered
 var currentQuestion = 0;
+var nextButton = document.createElement("button");
 
 var testQuestions = [
   {
@@ -101,15 +102,15 @@ function startGame() {
   //nextQuestion();
 }
 
-function nextQuestion(){
-    currentQuestion++;
-    askQuestion();
-}
-
-
+// function nextQuestion(){
+//     nextButton.addEventListener("click", function () {
+//     currentQuestion++;
+//     console.log(currentQuestion);
+//   });
+// }
 
 function askQuestion() {
-    //ADD A TIMER
+  //ADD A TIMER
   var button = document.getElementById("button");
   //starts with testQuestions[0], will increment to ask questions sequentially
   //1) randomly select a question
@@ -137,100 +138,148 @@ function askQuestion() {
   quizAnswersEl.appendChild(newButton4);
   newButton4.textContent = testQuestions[currentQuestion].options[3].option;
 
+  /// WORK ON THIS ONE
   newButton1.addEventListener("click", function () {
     if (testQuestions[currentQuestion].options[0].answer == true) {
+      currentQuestion++;
       var correct = document.createElement("p");
+      var nextButton = document.createElement("button");
       quizAnswersEl.appendChild(correct);
       correct.textContent = "Correct Answer!";
+      correct.setAttribute("id", "pEl");
       newButton1.style.display = "none";
       newButton2.style.display = "none";
       newButton3.style.display = "none";
       newButton4.style.display = "none";
-      
-      //nextQuestion()
+      var timerTimeout = setTimeout(function () {
+        correct.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     } else {
+      currentQuestion++;
       var wrong = document.createElement("p");
       quizAnswersEl.appendChild(wrong);
       wrong.textContent = "Wrong Answer!";
+      wrong.setAttribute("id", "pEl");
       newButton1.style.display = "none";
       newButton2.style.display = "none";
       newButton3.style.display = "none";
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
-      //wait 1 second
-      //nextQuestion()
+      var time = 2;
+      var timerTimeout = setTimeout(function () {
+        wrong.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     }
   });
   newButton2.addEventListener("click", function () {
     if (testQuestions[currentQuestion].options[1].answer == true) {
-        var correct = document.createElement("p");
-        quizAnswersEl.appendChild(correct);
-        correct.textContent = "Correct Answer!";
-        newButton1.style.display = "none";
-        newButton2.style.display = "none";
-        newButton3.style.display = "none";
-        newButton4.style.display = "none";
-        
-        //nextQuestion()
+      currentQuestion++;
+      var correct = document.createElement("p");
+      quizAnswersEl.appendChild(correct);
+      correct.textContent = "Correct Answer!";
+      correct.setAttribute("id", "pEl");
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      var timerTimeout = setTimeout(function () {
+        correct.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     } else {
-        var wrong = document.createElement("p");
-        quizAnswersEl.appendChild(wrong);
-        wrong.textContent = "Wrong Answer!";
-        newButton1.style.display = "none";
-        newButton2.style.display = "none";
-        newButton3.style.display = "none";
-        newButton4.style.display = "none";
-        //REDUCE TIME ON TIMER
-        //wait 1 second
-        //nextQuestion()
+      currentQuestion++;
+      var wrong = document.createElement("p");
+      quizAnswersEl.appendChild(wrong);
+      wrong.textContent = "Wrong Answer!";
+      wrong.setAttribute("id", "pEl");
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      //REDUCE TIME ON TIMER
+      var timerTimeout = setTimeout(function () {
+        wrong.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     }
   });
   newButton3.addEventListener("click", function () {
     if (testQuestions[currentQuestion].options[2].answer == true) {
-        var correct = document.createElement("p");
-        quizAnswersEl.appendChild(correct);
-        correct.textContent = "Correct Answer!";
-        newButton1.style.display = "none";
-        newButton2.style.display = "none";
-        newButton3.style.display = "none";
-        newButton4.style.display = "none";
-        
-        //nextQuestion()
+      currentQuestion++;
+      var correct = document.createElement("p");
+      quizAnswersEl.appendChild(correct);
+      correct.textContent = "Correct Answer!";
+      correct.setAttribute("id", "pEl");
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      var timerTimeout = setTimeout(function () {
+        correct.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     } else {
-        var wrong = document.createElement("p");
-        quizAnswersEl.appendChild(wrong);
-        wrong.textContent = "Wrong Answer!";
-        newButton1.style.display = "none";
-        newButton2.style.display = "none";
-        newButton3.style.display = "none";
-        newButton4.style.display = "none";
-        //REDUCE TIME ON TIMER
-        //wait 1 second
-        //nextQuestion()
+      currentQuestion++;
+      var wrong = document.createElement("p");
+      quizAnswersEl.appendChild(wrong);
+      wrong.textContent = "Wrong Answer!";
+      wrong.setAttribute("id", "pEl");
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      //REDUCE TIME ON TIMER
+      var timerTimeout = setTimeout(function () {
+        wrong.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     }
   });
   newButton4.addEventListener("click", function () {
     if (testQuestions[currentQuestion].options[3].answer == true) {
-        var correct = document.createElement("p");
-        quizAnswersEl.appendChild(correct);
-        correct.textContent = "Correct Answer!";
-        newButton1.style.display = "none";
-        newButton2.style.display = "none";
-        newButton3.style.display = "none";
-        newButton4.style.display = "none";
-        
-        //nextQuestion()
+      currentQuestion++;
+      var correct = document.createElement("p");
+      quizAnswersEl.appendChild(correct);
+      correct.textContent = "Correct Answer!";
+      correct.setAttribute("id", "pEl");
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      var timerTimeout = setTimeout(function () {
+        correct.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     } else {
-        var wrong = document.createElement("p");
-        quizAnswersEl.appendChild(wrong);
-        wrong.textContent = "Wrong Answer!";
-        newButton1.style.display = "none";
-        newButton2.style.display = "none";
-        newButton3.style.display = "none";
-        newButton4.style.display = "none";
-        //REDUCE TIME ON TIMER
-        //wait 1 second
-        //nextQuestion()
+      currentQuestion++;
+      var wrong = document.createElement("p");
+      quizAnswersEl.appendChild(wrong);
+      wrong.textContent = "Wrong Answer!";
+      wrong.setAttribute("id", "pEl");
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      //REDUCE TIME ON TIMER
+      var timerTimeout = setTimeout(function () {
+        wrong.style.display = "none";
+        console.log(currentQuestion);
+        askQuestion();
+      }, 2000);
     }
   });
 }
+
+// function nextQuestion() {
+//   currentQuestion++;
+//   askQuestion();
+// }
