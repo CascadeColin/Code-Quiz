@@ -5,8 +5,9 @@
 var startButton = document.querySelector(".start");
 var h1 = document.getElementById("h1");
 var p = document.getElementById("p");
-
 var quizAnswersEl = document.getElementById("quizAnswersEl");
+//Used to incremend to the next question after each is answered
+var currentQuestion = 0;
 
 var testQuestions = [
   {
@@ -16,10 +17,10 @@ var testQuestions = [
     questionText:
       "When a browser displays a page, what is it referencing to build the page?",
     options: [
-        {option:"DOM",answer:true}, 
-        {option:"JavaScript",answer:false}, 
-        {option:"HTML",answer:false}, 
-        {option:"CSS",answer:false}
+      { option: "DOM", answer: true },
+      { option: "JavaScript", answer: false },
+      { option: "HTML", answer: false },
+      { option: "CSS", answer: false },
     ],
   },
   {
@@ -28,40 +29,43 @@ var testQuestions = [
     questionText:
       "What is the best way to find out more information about a data type in your code?",
     options: [
-        {option:"Educated guess based on reading the code" ,answer:false},
-        {option:"use console.log() to display it in DevTools" ,answer:true},
-        {option:"use window.alert() to display it on the web app" ,answer:false},
-        {option: "Cry and give up",answer:false},
+      { option: "Educated guess based on reading the code", answer: false },
+      { option: "use console.log() to display it in DevTools", answer: true },
+      {
+        option: "use window.alert() to display it on the web app",
+        answer: false,
+      },
+      { option: "Cry and give up", answer: false },
     ],
   },
   {
     //index 2
     questionText: "How do you create a function in JavaScript?",
     options: [
-        {option:"function:myFunction()",answer:false},
-        {option: "function myFunction()" ,answer:false},
-        {option: "myFunction(function)",answer:false},
-        {option:"function = myFunction()" ,answer:true},
+      { option: "function:myFunction()", answer: false },
+      { option: "function myFunction()", answer: false },
+      { option: "myFunction(function)", answer: false },
+      { option: "function = myFunction()", answer: true },
     ],
   },
   {
     //index 3
     questionText: "How does a FOR loop start?",
     options: [
-        {option:"for (i=0; i<=5)" ,answer:false},
-        {option:"for i = i to 5" ,answer:false},
-        {option:"for (i=0; i<=5, i++)" ,answer:true},
-        {option:"for (i<=5, i++)" ,answer:false},
+      { option: "for (i=0; i<=5)", answer: false },
+      { option: "for i = i to 5", answer: false },
+      { option: "for (i=0; i<=5, i++)", answer: true },
+      { option: "for (i<=5, i++)", answer: false },
     ],
   },
   {
     //index 4
     questionText: "How do you add a comment in a JavaScript file?",
     options: [
-        {option:"//Comment" ,answer:true},
-        {option:"`Comment" ,answer:false},
-        {option:"<!--Comment-->" ,answer:false},
-        {option:">comment" ,answer:false},
+      { option: "//Comment", answer: true },
+      { option: "`Comment", answer: false },
+      { option: "<!--Comment-->", answer: false },
+      { option: ">comment", answer: false },
     ],
   },
   {
@@ -69,28 +73,24 @@ var testQuestions = [
     questionText:
       "What is the correct “if” statements to execute certain code if “x” is equal to 2?",
     options: [
-        {option:"if(x 2)" ,answer:false},
-        {option:"if(x = 2)" ,answer:false},
-        {option:"if(x == 2)" ,answer:true},
-        {option:"if(x != 2 )" ,answer:false},
+      { option: "if(x 2)", answer: false },
+      { option: "if(x = 2)", answer: false },
+      { option: "if(x == 2)", answer: true },
+      { option: "if(x != 2 )", answer: false },
     ],
   },
   {
     //index 6
     questionText: "What will Boolean(3<7) return?",
     options: [
-        {option:"true" ,answer:true},
-        {option:"false" ,answer:false},
-        {option:"NaN" ,answer:false},
-        {option:"SyntaxError",answer:false},
+      { option: "true", answer: true },
+      { option: "false", answer: false },
+      { option: "NaN", answer: false },
+      { option: "SyntaxError", answer: false },
     ],
   },
 ];
 
-console.log(testQuestions[0].options[0].answer);
-console.log(testQuestions[0].options[1].answer);
-console.log(testQuestions[0].options[2].answer);
-console.log(testQuestions[0].options[3].answer);
 // for randomly selecting questions - will add later
 // var questionRandomIndex = Math.floor(Math.random() * testQuestions.length);
 
@@ -98,20 +98,22 @@ startButton.addEventListener("click", startGame);
 
 function startGame() {
   askQuestion();
-  //   questionFormat();
+  //nextQuestion();
 }
 
-// function askQuestion(){
-//this function will ask the user questions
-//upon multiple choice selection, check if answer correct, and store result
-//
-// }
+function nextQuestion(){
+    currentQuestion++;
+    askQuestion();
+}
+
+
 
 function askQuestion() {
+    //ADD A TIMER
   var button = document.getElementById("button");
-  var correct = 
+  //starts with testQuestions[0], will increment to ask questions sequentially
   //1) randomly select a question
-  h1.textContent = testQuestions[0].questionText;
+  h1.textContent = testQuestions[currentQuestion].questionText;
   //hide the p tag here
   //these are hidden, not deleted
   button.style.display = "none";
@@ -119,55 +121,116 @@ function askQuestion() {
   //hide the start button
   //insert new content
   var newButton1 = document.createElement("button");
+  newButton1.className = "answerButton";
   quizAnswersEl.appendChild(newButton1);
-  newButton1.textContent = testQuestions[0].options[0].option;
+  newButton1.textContent = testQuestions[currentQuestion].options[0].option;
   var newButton2 = document.createElement("button");
+  newButton2.className = "answerButton";
   quizAnswersEl.appendChild(newButton2);
-  newButton2.textContent = testQuestions[0].options[1].option;
+  newButton2.textContent = testQuestions[currentQuestion].options[1].option;
   var newButton3 = document.createElement("button");
+  newButton3.className = "answerButton";
   quizAnswersEl.appendChild(newButton3);
-  newButton3.textContent = testQuestions[0].options[2].option;
+  newButton3.textContent = testQuestions[currentQuestion].options[2].option;
   var newButton4 = document.createElement("button");
+  newButton4.className = "answerButton";
   quizAnswersEl.appendChild(newButton4);
-  newButton4.textContent = testQuestions[0].options[3].option;
-  console.log();
+  newButton4.textContent = testQuestions[currentQuestion].options[3].option;
 
-  answerCheck = [newButton1, newButton2, newButton3, newButton4];
-  console.log(answerCheck[0]);
-
-  newButton1.addEventListener("click", function() {
-    if (testQuestions[5].options[0].answer == true) {
-        console.log("true");
+  newButton1.addEventListener("click", function () {
+    if (testQuestions[currentQuestion].options[0].answer == true) {
+      var correct = document.createElement("p");
+      quizAnswersEl.appendChild(correct);
+      correct.textContent = "Correct Answer!";
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      
+      //nextQuestion()
     } else {
-        console.log("false");
+      var wrong = document.createElement("p");
+      quizAnswersEl.appendChild(wrong);
+      wrong.textContent = "Wrong Answer!";
+      newButton1.style.display = "none";
+      newButton2.style.display = "none";
+      newButton3.style.display = "none";
+      newButton4.style.display = "none";
+      //REDUCE TIME ON TIMER
+      //wait 1 second
+      //nextQuestion()
     }
-  })
-  newButton2.addEventListener("click", function() {
-    if (testQuestions[5].options[1].answer == true) {
-        console.log("true");
+  });
+  newButton2.addEventListener("click", function () {
+    if (testQuestions[currentQuestion].options[1].answer == true) {
+        var correct = document.createElement("p");
+        quizAnswersEl.appendChild(correct);
+        correct.textContent = "Correct Answer!";
+        newButton1.style.display = "none";
+        newButton2.style.display = "none";
+        newButton3.style.display = "none";
+        newButton4.style.display = "none";
+        
+        //nextQuestion()
     } else {
-        console.log("false");
+        var wrong = document.createElement("p");
+        quizAnswersEl.appendChild(wrong);
+        wrong.textContent = "Wrong Answer!";
+        newButton1.style.display = "none";
+        newButton2.style.display = "none";
+        newButton3.style.display = "none";
+        newButton4.style.display = "none";
+        //REDUCE TIME ON TIMER
+        //wait 1 second
+        //nextQuestion()
     }
-  })
-  newButton3.addEventListener("click", function() {
-    if (testQuestions[5].options[2].answer == true) {
-        console.log("true");
+  });
+  newButton3.addEventListener("click", function () {
+    if (testQuestions[currentQuestion].options[2].answer == true) {
+        var correct = document.createElement("p");
+        quizAnswersEl.appendChild(correct);
+        correct.textContent = "Correct Answer!";
+        newButton1.style.display = "none";
+        newButton2.style.display = "none";
+        newButton3.style.display = "none";
+        newButton4.style.display = "none";
+        
+        //nextQuestion()
     } else {
-        console.log("false");
+        var wrong = document.createElement("p");
+        quizAnswersEl.appendChild(wrong);
+        wrong.textContent = "Wrong Answer!";
+        newButton1.style.display = "none";
+        newButton2.style.display = "none";
+        newButton3.style.display = "none";
+        newButton4.style.display = "none";
+        //REDUCE TIME ON TIMER
+        //wait 1 second
+        //nextQuestion()
     }
-  })
-  newButton4.addEventListener("click", function() {
-    if (testQuestions[5].options[3].answer == true) {
-        console.log("true");
+  });
+  newButton4.addEventListener("click", function () {
+    if (testQuestions[currentQuestion].options[3].answer == true) {
+        var correct = document.createElement("p");
+        quizAnswersEl.appendChild(correct);
+        correct.textContent = "Correct Answer!";
+        newButton1.style.display = "none";
+        newButton2.style.display = "none";
+        newButton3.style.display = "none";
+        newButton4.style.display = "none";
+        
+        //nextQuestion()
     } else {
-        console.log("false");
+        var wrong = document.createElement("p");
+        quizAnswersEl.appendChild(wrong);
+        wrong.textContent = "Wrong Answer!";
+        newButton1.style.display = "none";
+        newButton2.style.display = "none";
+        newButton3.style.display = "none";
+        newButton4.style.display = "none";
+        //REDUCE TIME ON TIMER
+        //wait 1 second
+        //nextQuestion()
     }
-  })
-
-//   for (i=0, i<answerCheck.length, i++) {
-//     if ()
-//   }
-
-  //let testQuestions[0].answer = correct answer, otherwise wrong answer
-  //if button is pressed, testQuestions[i++];, repeat until done
+  });
 }
