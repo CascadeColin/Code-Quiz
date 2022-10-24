@@ -2,20 +2,21 @@
 // if .hsButton clicked, display highscores
 // use local storage to append new game results into highscores{} (JSON.parse, JSON.stringify) and have highscores display the contents of highscores{} by using the index values to line item them.
 
-
 //TO DO:
 //write highscore();
-//add timer
-//if wrong answer, timer--
 
 var startButton = document.querySelector(".start");
+var viewHighscore = document.querySelector("#seeHS");
 var h1 = document.getElementById("h1");
-
 var quizAnswersEl = document.getElementById("quizAnswersEl");
+var answerEl = document.getElementById("answerEl");
 //Used to incremend to the next question after each is answered
 var currentQuestion = 0;
-var nextButton = document.createElement("button");
-
+var timerEl = document.getElementById("timer");
+var time = 5;
+var quizComplete = false;
+var highscoreInitials = [];
+var highscoreScore = [];
 var testQuestions = [
   {
     //property = value
@@ -98,40 +99,114 @@ var testQuestions = [
   },
 ];
 
-// for randomly selecting questions - will add later
-// var questionRandomIndex = Math.floor(Math.random() * testQuestions.length);
-
 startButton.addEventListener("click", startGame);
+viewHighscore.addEventListener("click", function () {
+  var initials = JSON.parse(localStorage.getItem("initials"));
+  var score = JSON.parse(localStorage.getItem("score"));
+  console.log(initials);
+  console.log(score);
+
+  var closeHighscore = document.createElement("button");
+  closeHighscore.className = "close";
+  closeHighscore.textContent = "Close Highscores";
+  hsEl.appendChild(closeHighscore);
+  for (i = 0; i < initials.length; i++) {
+    var hsDisplay = document.createElement("p");
+    hsDisplay.setAttribute("id", "close");
+    hsEl.appendChild(hsDisplay);
+    hsDisplay.textContent =
+      "Initials: " + initials[i] + "      Score: " + score[i];
+    // window.alert("Highscores: \nInitials: " + initials[i] + "   Score: " + score[i])
+  }
+  closeHighscore.addEventListener("click", function () {
+    closeHighscore.style.display = "none";
+    var close = document.querySelectorAll("#close");
+    console.log(close);
+    for (i = 1; i <= 100; i++) {
+      document.body.children[1].children[0].children[3].children[
+        i
+      ].style.display = "none";
+    }
+  });
+});
 
 function startGame() {
   askQuestion();
-  //startTimer();
+  startTimer();
 }
 
-// function highscores() {
-    //use localStorage to store things
-    //time left on timer = score
-    //store initials, store score
-    //set up window.alert displaying highscore if user clicks highscores button
-    //SEE: miniproject
-// }
+function highscores() {
+  //use localStorage to store things
+  //time left on timer = score
+  //store initials, store score
+  //set up window.alert displaying highscore if user clicks highscores button
+  //SEE: miniproject
+  var addNewHS = window.prompt(
+    "Game Over!  Enter your initials for the highscores."
+  );
+  answerEl.style.display = "none";
+  var addNewTime = time;
+  //   highscoreInitials.splice(1, 0, addNewHS);
+  //   highscoreScore.splice(1, 0, addNewTime);
+  highscoreInitials.push(addNewHS);
+  highscoreScore.push(addNewTime);
+  console.log(highscoreInitials);
+  console.log(highscoreScore);
+  localStorage.setItem("initials", JSON.stringify(highscoreInitials));
+  localStorage.setItem("score", JSON.stringify(highscoreScore));
+  console.log(highscoreInitials);
+  //this is overriding data.  find out why and fix
 
-// function startTimer() {
-//     time = X;
-//     Time interval
-//     if time = 0, end Game
-//     if user wins, time = score
-// }
+  //resets landing page so user can take the quiz again
+  button.style.display = "block";
+  currentQuestion = 0;
+  time = 5;
+}
+
+function startTimer() {
+  // time = X;
+  // Time interval
+  // if time = 0, end Game
+  // if user wins, time = score
+  var timer = setInterval(function () {
+    if (time > 1) {
+      timerEl.textContent = time + " seconds remaining";
+      time--;
+      if (currentQuestion == testQuestions.length) {
+        timerEl.textContent = "";
+        clearInterval(timer);
+      }
+    } else if (time === 1) {
+      timerEl.textContent = time + " second remaining";
+      time--;
+    } else {
+      timerEl.textContent = "";
+      clearInterval(timer);
+      console.log(time);
+      highscores();
+      var button = document.getElementById("button");
+      button.style.display = "block";
+      h1.textContent = "Welcome to Code Quiz!";
+      var answerEl = document.querySelectorAll(".answerButton");
+      console.log(answerEl[0]); 
+      for (i = 0; i < (answerEl.length); i++) {
+        console.log(answerEl[i]);
+        answerEl[i].style.display = "none";
+      }
+      
+      //bugged, make sure this resets the page
+    }
+  }, 1000);
+}
 
 function askQuestion() {
   //ADD A TIMER
   var button = document.getElementById("button");
-  //starts with testQuestions[0], will increment to ask questions sequentially
-  //1) randomly select a question
+  button.style.display = "none";
   h1.textContent = testQuestions[currentQuestion].questionText;
   //hide the p tag here
   //these are hidden, not deleted
-  button.style.display = "none";
+
   //hide the start button
   //insert new content
   var newButton1 = document.createElement("button");
@@ -168,10 +243,10 @@ function askQuestion() {
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            //run highscores();
-            window.alert("highscores")
+          // window.alert("highscore: " + time);
+          highscores();
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     } else {
@@ -185,14 +260,16 @@ function askQuestion() {
       newButton3.style.display = "none";
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
+      time = time - 10;
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          // window.alert("highscore: " + time);
+          highscores();
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     }
@@ -213,30 +290,33 @@ function askQuestion() {
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          // window.alert("highscore: " + time);
+          highscores();
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     } else {
       currentQuestion++;
       var wrong = document.createElement("p");
-      quizAnswersEl.appendChild(wrong);
+      answerEl.appendChild(wrong);
       wrong.textContent = "Wrong Answer!";
       wrong.setAttribute("id", "pEl");
       newButton1.style.display = "none";
       newButton2.style.display = "none";
       newButton3.style.display = "none";
       newButton4.style.display = "none";
-      //REDUCE TIME ON TIMER
-      var timerTimeout = setTimeout(function () {
+      time = time - 10;
+      var timerTimeout = setTimeout(function (ev) {
+        ev.stopPropagation();
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          // window.alert("highscore: " + time);
+          highscores();
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     }
@@ -257,9 +337,9 @@ function askQuestion() {
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          window.alert("highscore: " + time);
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     } else {
@@ -273,14 +353,15 @@ function askQuestion() {
       newButton3.style.display = "none";
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
+      time = time - 10;
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          window.alert("highscore: " + time);
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     }
@@ -301,9 +382,9 @@ function askQuestion() {
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          window.alert("highscore: " + time);
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     } else {
@@ -317,21 +398,17 @@ function askQuestion() {
       newButton3.style.display = "none";
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
+      time = time - 10;
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
-            window.alert("highscores")
+          window.alert("highscore: " + time);
         } else {
-            askQuestion();
+          askQuestion();
         }
       }, 2000);
     }
   });
 }
-
-// function nextQuestion() {
-//   currentQuestion++;
-//   askQuestion();
-// }
