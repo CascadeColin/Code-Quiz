@@ -12,6 +12,7 @@ var testQuestions = [
   {
     //property = value
     //key value pairs
+    //index 0
     questionText:
       "When a browser displays a page, what is it referencing to build the page?",
     options: [
@@ -23,6 +24,7 @@ var testQuestions = [
   },
   {
     //finish setting up questions once linked
+    //index 1
     questionText:
       "What is the best way to find out more information about a data type in your code?",
     options: [
@@ -33,6 +35,7 @@ var testQuestions = [
     ],
   },
   {
+    //index 2
     questionText: "How do you create a function in JavaScript?",
     options: [
         {option:"function:myFunction()",answer:false},
@@ -40,9 +43,9 @@ var testQuestions = [
         {option: "myFunction(function)",answer:false},
         {option:"function = myFunction()" ,answer:true},
     ],
-    answer: 4,
   },
   {
+    //index 3
     questionText: "How does a FOR loop start?",
     options: [
         {option:"for (i=0; i<=5)" ,answer:false},
@@ -52,6 +55,7 @@ var testQuestions = [
     ],
   },
   {
+    //index 4
     questionText: "How do you add a comment in a JavaScript file?",
     options: [
         {option:"//Comment" ,answer:true},
@@ -61,6 +65,7 @@ var testQuestions = [
     ],
   },
   {
+    //index 5
     questionText:
       "What is the correct “if” statements to execute certain code if “x” is equal to 2?",
     options: [
@@ -71,6 +76,7 @@ var testQuestions = [
     ],
   },
   {
+    //index 6
     questionText: "What will Boolean(3<7) return?",
     options: [
         {option:"true" ,answer:true},
@@ -81,6 +87,10 @@ var testQuestions = [
   },
 ];
 
+console.log(testQuestions[0].options[0].answer);
+console.log(testQuestions[0].options[1].answer);
+console.log(testQuestions[0].options[2].answer);
+console.log(testQuestions[0].options[3].answer);
 // for randomly selecting questions - will add later
 // var questionRandomIndex = Math.floor(Math.random() * testQuestions.length);
 
@@ -110,22 +120,53 @@ function askQuestion() {
   //insert new content
   var newButton1 = document.createElement("button");
   quizAnswersEl.appendChild(newButton1);
-  newButton1.className = 0;
-  newButton1.textContent = testQuestions[0].options[0];
+  newButton1.textContent = testQuestions[0].options[0].option;
   var newButton2 = document.createElement("button");
   quizAnswersEl.appendChild(newButton2);
-  newButton2.className = 1;
-  newButton2.textContent = testQuestions[0].options[1];
+  newButton2.textContent = testQuestions[0].options[1].option;
   var newButton3 = document.createElement("button");
   quizAnswersEl.appendChild(newButton3);
-  newButton3.className = 2;
-  newButton3.textContent = testQuestions[0].options[2];
+  newButton3.textContent = testQuestions[0].options[2].option;
   var newButton4 = document.createElement("button");
   quizAnswersEl.appendChild(newButton4);
-  newButton4.className = 3;
-  newButton4.textContent = testQuestions[0].options[3];
+  newButton4.textContent = testQuestions[0].options[3].option;
   console.log();
 
+  answerCheck = [newButton1, newButton2, newButton3, newButton4];
+  console.log(answerCheck[0]);
+
+  newButton1.addEventListener("click", function() {
+    if (testQuestions[5].options[0].answer == true) {
+        console.log("true");
+    } else {
+        console.log("false");
+    }
+  })
+  newButton2.addEventListener("click", function() {
+    if (testQuestions[5].options[1].answer == true) {
+        console.log("true");
+    } else {
+        console.log("false");
+    }
+  })
+  newButton3.addEventListener("click", function() {
+    if (testQuestions[5].options[2].answer == true) {
+        console.log("true");
+    } else {
+        console.log("false");
+    }
+  })
+  newButton4.addEventListener("click", function() {
+    if (testQuestions[5].options[3].answer == true) {
+        console.log("true");
+    } else {
+        console.log("false");
+    }
+  })
+
+//   for (i=0, i<answerCheck.length, i++) {
+//     if ()
+//   }
 
   //let testQuestions[0].answer = correct answer, otherwise wrong answer
   //if button is pressed, testQuestions[i++];, repeat until done
