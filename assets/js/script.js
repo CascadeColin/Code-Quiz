@@ -2,6 +2,12 @@
 // if .hsButton clicked, display highscores
 // use local storage to append new game results into highscores{} (JSON.parse, JSON.stringify) and have highscores display the contents of highscores{} by using the index values to line item them.
 
+
+//TO DO:
+//write highscore();
+//add timer
+//if wrong answer, timer--
+
 var startButton = document.querySelector(".start");
 var h1 = document.getElementById("h1");
 var p = document.getElementById("p");
@@ -99,14 +105,22 @@ startButton.addEventListener("click", startGame);
 
 function startGame() {
   askQuestion();
-  //nextQuestion();
+  //startTimer();
 }
 
-// function nextQuestion(){
-//     nextButton.addEventListener("click", function () {
-//     currentQuestion++;
-//     console.log(currentQuestion);
-//   });
+// function highscores() {
+    //use localStorage to store things
+    //time left on timer = score
+    //store initials, store score
+    //set up window.alert displaying highscore if user clicks highscores button
+
+// }
+
+// function startTimer() {
+//     time = X;
+//     Time interval
+//     if time = 0, end Game
+//     if user wins, time = score
 // }
 
 function askQuestion() {
@@ -155,6 +169,7 @@ function askQuestion() {
         console.log(currentQuestion);
         console.log(testQuestions.length);
         if (currentQuestion == testQuestions.length) {
+            //run highscores();
             window.alert("highscores")
         } else {
             askQuestion();
