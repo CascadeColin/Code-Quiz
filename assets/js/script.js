@@ -143,7 +143,6 @@ function askQuestion() {
     if (testQuestions[currentQuestion].options[0].answer == true) {
       currentQuestion++;
       var correct = document.createElement("p");
-      var nextButton = document.createElement("button");
       quizAnswersEl.appendChild(correct);
       correct.textContent = "Correct Answer!";
       correct.setAttribute("id", "pEl");
@@ -154,7 +153,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         correct.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     } else {
       currentQuestion++;
@@ -167,11 +171,15 @@ function askQuestion() {
       newButton3.style.display = "none";
       newButton4.style.display = "none";
       //REDUCE TIME ON TIMER
-      var time = 2;
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     }
   });
@@ -189,7 +197,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         correct.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     } else {
       currentQuestion++;
@@ -205,7 +218,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     }
   });
@@ -223,7 +241,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         correct.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     } else {
       currentQuestion++;
@@ -239,7 +262,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     }
   });
@@ -257,7 +285,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         correct.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     } else {
       currentQuestion++;
@@ -273,7 +306,12 @@ function askQuestion() {
       var timerTimeout = setTimeout(function () {
         wrong.style.display = "none";
         console.log(currentQuestion);
-        askQuestion();
+        console.log(testQuestions.length);
+        if (currentQuestion == testQuestions.length) {
+            window.alert("highscores")
+        } else {
+            askQuestion();
+        }
       }, 2000);
     }
   });
