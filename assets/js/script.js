@@ -10,7 +10,7 @@
 
 var startButton = document.querySelector(".start");
 var h1 = document.getElementById("h1");
-var p = document.getElementById("p");
+
 var quizAnswersEl = document.getElementById("quizAnswersEl");
 //Used to incremend to the next question after each is answered
 var currentQuestion = 0;
@@ -113,7 +113,7 @@ function startGame() {
     //time left on timer = score
     //store initials, store score
     //set up window.alert displaying highscore if user clicks highscores button
-
+    //SEE: miniproject
 // }
 
 // function startTimer() {
@@ -132,7 +132,6 @@ function askQuestion() {
   //hide the p tag here
   //these are hidden, not deleted
   button.style.display = "none";
-  p.style.display = "none";
   //hide the start button
   //insert new content
   var newButton1 = document.createElement("button");
